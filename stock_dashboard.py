@@ -104,7 +104,7 @@ def prepare(df: pd.DataFrame) -> pd.DataFrame:
     for col in out.columns:
         low = str(col).lower()
         if any(k in low for k in ["score", "pct", "ratio", "take", "stop", "entry", "close", "progress", "turnover", "vol_"]):
-            out[col] = pd.to_numeric(out[col], errors="ignore")
+            out[col] = pd.to_numeric(out[col], errors="coerce")
     return out
 
 
