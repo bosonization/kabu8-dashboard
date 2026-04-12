@@ -1,9 +1,9 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 BASE_DIR = Path(".")
 DASHBOARD_DATA_DIR = BASE_DIR / "dashboard_data"
-
-from __future__ import annotations
 
 import os
 from pathlib import Path
