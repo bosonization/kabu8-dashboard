@@ -1,7 +1,28 @@
-# kabu8-dashboard
+# KABU8 Market Lens
 
-日本株の売買判断用ダッシュボードです。  
-このリポジトリは **表示専用** で、分析ロジック本体は含みません。
+**日本株の候補抽出を、毎日ぶれずに。**
+
+KABU8 Market Lens は、日本株の候補抽出を毎日ぶれずに行うための**判断支援ダッシュボード**です。  
+テクニカル候補、IFD候補、決算進捗補強を一画面で整理し、売買判断前の迷いを減らすことを目的としています。
+
+このリポジトリは **表示専用** であり、分析ロジック本体は含みません。
+
+---
+
+## このダッシュボードが提供するもの
+- テクニカル候補の可視化
+- IFD候補の確認
+- 決算進捗補強の確認
+- 当日確認すべき候補の比較
+- 更新状況とデータ信頼性の可視化
+
+## このダッシュボードが提供しないもの
+- 投資助言
+- 利益保証
+- 完全自動売買
+- 売買ロジック本体の公開
+
+---
 
 ## 役割
 この公開リポジトリは、非公開リポジトリ側で生成された CSV を `dashboard_data/` に反映し、  
@@ -12,6 +33,10 @@
   Streamlit の表示アプリ本体
 - `requirements.txt`  
   Streamlit Community Cloud 用の依存関係
+- `.streamlit/config.toml`  
+  テーマ設定
+- `assets/`  
+  アイコン、ロゴ、favicon
 - `dashboard_data/*.csv`  
   非公開リポジトリの GitHub Actions が自動反映する表示用データ
 
@@ -23,123 +48,29 @@
 
 ---
 
-## デプロイ前提
-このリポジトリは、**Streamlit Community Cloud** での公開を前提としています。
-
-想定構成:
+## 想定ディレクトリ構成
 
 ```text
 stock_dashboard.py
 requirements.txt
+README.md
+.streamlit/
+  config.toml
+assets/
+  favicon.png
+  kabu8_icon_square.png
+  kabu8_logo_horizontal.png
 dashboard_data/
   technical_signals_all.csv
   technical_buy_candidates.csv
   technical_today_top.csv
+  technical_weekly_watchlist.csv
+  technical_priority_watchlist.csv
   ifd_candidates_preopen.csv
   ifd_candidates_0930.csv
+  ifd_candidates_all.csv
   kabupro_progress_all.csv
   technical_run_summary.csv
   kabupro_run_summary.csv
+  run_daily_summary.csv
   last_updated_utc.txt
-```
-
----
-
-## ローカル実行方法
-
-### 1. 依存関係をインストール
-```bash
-pip install -r requirements.txt
-```
-
-### 2. アプリを起動
-```bash
-streamlit run stock_dashboard.py
-```
-
-### 3. ブラウザで確認
-通常は次のようなローカル URL が表示されます。
-
-```text
-http://localhost:8501
-```
-
----
-
-## Streamlit Community Cloud での公開
-
-### 入力値
-- **Repository**  
-  `https://github.com/bosonization/kabu8-dashboard/blob/main/stock_dashboard.py`
-- **Branch**  
-  `main`
-- **Main file path**  
-  `stock_dashboard.py`
-
-### 注意
-このリポジトリは公開用です。  
-表示ロジックのみを置き、分析本体コードは非公開リポジトリに残します。
-
----
-
-## データ更新の流れ
-1. 非公開リポジトリ側の GitHub Actions が実行される
-2. `run_daily_selected10.py` により分析が実行される
-3. 生成された CSV をこの公開リポジトリの `dashboard_data/` に自動反映する
-4. Streamlit Community Cloud 側で最新データが表示される
-
----
-
-## dashboard_data に入る主なファイル
-- `technical_signals_all.csv`  
-  全銘柄のテクニカル評価
-- `technical_buy_candidates.csv`  
-  買い候補一覧
-- `technical_today_top.csv`  
-  当日優先候補
-- `ifd_candidates_preopen.csv`  
-  寄り前 IFD 候補
-- `ifd_candidates_0930.csv`  
-  9:30 前後 IFD 候補
-- `kabupro_progress_all.csv`  
-  決算進捗結果
-- `technical_run_summary.csv`  
-  テクニカル実行サマリー
-- `kabupro_run_summary.csv`  
-  決算進捗実行サマリー
-- `last_updated_utc.txt`  
-  最終更新時刻
-
----
-
-## 公開時の方針
-- このリポジトリには **売買ロジック本体を置かない**
-- 表示に不要な内部メモや機密情報は CSV に含めない
-- `stock_dashboard.py` は **表示専用** にする
-- 判定ロジックや PDF 解析ロジックは非公開リポジトリで管理する
-
----
-
-## トラブルシュート
-
-### 画面は出るがデータが空
-`dashboard_data/` に CSV が入っているか確認してください。  
-非公開リポジトリ側の GitHub Actions が失敗している可能性があります。
-
-### Streamlit Community Cloud で起動エラーになる
-`requirements.txt` が不足している可能性があります。  
-最低限、このリポジトリでは以下を使用します。
-- streamlit
-- pandas
-- numpy
-- plotly
-
-### 価格チャートが出ない
-`stock_dashboard.py` の設定によっては `prices/` が無い環境では価格チャートが限定表示になる場合があります。  
-Community Cloud では基本的に `dashboard_data/` の CSV 可視化を主目的としてください。
-
----
-
-## ライセンス / 取り扱い
-この公開リポジトリは表示用途を想定しています。  
-分析本体や商用ロジックは、別の非公開リポジトリで管理してください。
