@@ -1,2 +1,2 @@
 ﻿signals_count,buy_candidates_count,weekly_watch_count,priority_watch_count,today_top_count,ifd_preopen_count,ifd_0930_count,missing_files_count,prices_dir,output_dir,target_codes
-200,4,25,4,0,0,0,0,/home/runner/work/kabu8/kabu8/prices,/home/runner/work/kabu8/kabu8/technical_outputs,
+200,4,20,4,1,0,0,0,/home/runner/work/kabu8/kabu8/prices,/home/runner/work/kabu8/kabu8/technical_outputs,
