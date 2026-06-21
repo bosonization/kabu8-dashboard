@@ -1,1 +1,2 @@
 ﻿code,latest_date,action,setup_type,weekly_up,daily_up,latest_close,entry_low,entry_high,take1,stop,rr1,risk_pct,vol_ratio,turnover_med25_mn_yen,total_score,today_rank_score,ifd_reco_time,ifd_order_type,ifd_entry_price,ifd_take_profit,ifd_stop_loss,ifd_0930_formula,ifd_skip_rule,ifd_note
+4776,2026-06-19,買い候補（押し目）,押し目買い,True,False,2317.0,2305.4,2425.6,2653.3,2212.7,3.8,4.0,0.7,996.1,65.2,168.3,09:00前,IFD-OCO 指値,2365.5,2653.3,2212.7,,寄り付きが entry_high×1.02 超なら見送り / 寄り付きが stop 割れなら見送り,押し目を前日計算の価格帯で拾う。忙しい人向けの基本形。
